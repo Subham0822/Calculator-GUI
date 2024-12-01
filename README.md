@@ -19,7 +19,7 @@ A simple and visually appealing calculator application built using **Tkinter** i
 - **Input Field**: Light gray (`#E0E0E0`) background with black text.
 
 ## Screenshot
-[Click Here](SCREENSHOT.PNG)
+[Click Here](screenshot.png)
 
 ## Getting Started
 
