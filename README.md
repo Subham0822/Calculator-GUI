@@ -62,6 +62,3 @@ A simple and visually appealing calculator application built using **Tkinter** i
 ## Contributing
 Contributions are welcome! Feel free to submit a pull request or raise an issue for improvements.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
