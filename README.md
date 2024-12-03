@@ -51,7 +51,6 @@ A simple and visually appealing calculator application built using **Tkinter** i
 │
 ├── calculator.py      # Main Python script
 ├── screenshot.png     # Sample screenshot
-├── LICENSE
 ├── README.md          # Project documentation
 └── .gitignore         # Git ignore file (if any sensitive files)
 ```
