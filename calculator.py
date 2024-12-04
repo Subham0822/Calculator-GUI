@@ -1,18 +1,22 @@
 from tkinter import *
+from tkmacosx import Button  # Importing the tkmacosx Button
+from tkinter import PhotoImage
 
 # Initialize main window
 me = Tk()
-me.geometry("366x460")
+me.geometry("350x480")
 me.title("CALCULATOR")
-me.config(background='#2D2D2D')  # Dark gray-blue
+me.iconphoto(True, PhotoImage(file='/Users/subhamrakshit/Desktop/coding/GUI/calculator-tkinter/calc-icon.png'))
+me.config(background='#1E1E2F')  # Deep dark blue-gray
 
-# Label
-Label(me, text="CALCULATOR", bg='#2D2D2D', fg='#FFFFFF', font=("Times", 30, 'bold')).pack(side=TOP)
+# Label for Title
+Label(me, text="CALCULATOR", bg='#1E1E2F', fg='#F5F5F5', font=("Helvetica", 24, 'bold')).pack(side=TOP, pady=10)
 
 # Input field
 textin = StringVar()
 operator = ""
 
+# Functions
 def clickbut(number):
     """Handles number or operator button click."""
     global operator
@@ -26,7 +30,7 @@ def equlbut():
         result = str(eval(operator))
         textin.set(result)
         operator = ""
-    except Exception as e:
+    except Exception:
         textin.set("Error")
         operator = ""
 
@@ -37,44 +41,52 @@ def clrbut():
     textin.set("")
 
 # Input entry field
-Entry(me, font=("Courier New", 12, 'bold'), textvar=textin, width=25, bd=5, bg='#E0E0E0', fg='#000000').pack()
+Entry(
+    me, font=("Courier New", 16, 'bold'), textvar=textin, width=20, bd=5,
+    bg='#292A36', fg='#FFFFFF', justify='right', insertbackground='#FFFFFF'
+).pack(pady=10)
 
 # Buttons configuration
 buttons = [
-    ('1', 10, 100), ('2', 75, 100), ('3', 140, 100),
-    ('4', 10, 170), ('5', 75, 170), ('6', 140, 170),
-    ('7', 10, 240), ('8', 75, 240), ('9', 140, 240),
-    ('0', 10, 310), ('.', 75, 310),
-    ('+', 205, 100), ('-', 205, 170),
-    ('*', 205, 240), ('/', 205, 310),
-    ('CE', 270, 100), ('=', 10, 380)
+    ('1', 10, 120), ('2', 90, 120), ('3', 170, 120), ('+', 250, 120),
+    ('4', 10, 190), ('5', 90, 190), ('6', 170, 190), ('-', 250, 190),
+    ('7', 10, 260), ('8', 90, 260), ('9', 170, 260), ('*', 250, 260),
+    ('0', 10, 330), ('.', 90, 330), ('/', 170, 330), ('CE', 250, 330),
+    ('=', 10, 400)
 ]
 
 # Colors
 digit_bg = '#4CAF50'  # Green
-digit_fg = '#4169E1'  # Royal Blue
+digit_fg = '#FFFFFF'
 op_bg = '#2196F3'  # Blue
-op_fg = '#4169E1'  # Royal Blue
+op_fg = '#FFFFFF'
 clr_bg = '#F44336'  # Red
-clr_fg = '#4169E1'  # Royal Blue
+clr_fg = '#FFFFFF'
 eq_bg = '#FF9800'  # Orange
-eq_fg = '#4169E1'  # Royal Blue
+eq_fg = '#FFFFFF'
 
-# Create and place buttons dynamically
+# Create and place buttons dynamically using tkmacosx Button
 for (text, x, y) in buttons:
     if text == "=":
-        Button(me, text=text, padx=151, pady=14, bd=4, bg=eq_bg, fg=eq_fg, command=equlbut,
-               font=("Courier New", 16, 'bold')).place(x=x, y=y)
+        Button(
+            me, text=text, width=320, height=60, bg=eq_bg, fg=eq_fg,
+            activebackground='#FF7700', activeforeground='#FFFFFF', command=equlbut,
+            font=("Courier New", 16, 'bold')
+        ).place(x=x, y=y)
     elif text == "CE":
-        Button(me, text=text, padx=14, pady=119, bd=4, bg=clr_bg, fg=clr_fg, command=clrbut,
-               font=("Courier New", 16, 'bold')).place(x=x, y=y)
-    elif text == ".":
-        Button(me, text=text, padx=47, pady=14, bd=4, bg=digit_bg, fg=digit_fg, command=lambda t=text: clickbut(t),
-               font=("Courier New", 16, 'bold')).place(x=x, y=y)
+        Button(
+            me, text=text, width=80, height=60, bg=clr_bg, fg=clr_fg,
+            activebackground='#FF5733', activeforeground='#FFFFFF', command=clrbut,
+            font=("Courier New", 16, 'bold')
+        ).place(x=x, y=y)
     else:
         bg_color = digit_bg if text.isdigit() else op_bg
-        Button(me, text=text, padx=14, pady=14, bd=4, bg=bg_color, fg=op_fg, command=lambda t=text: clickbut(t),
-               font=("Courier New", 16, 'bold')).place(x=x, y=y)
+        Button(
+            me, text=text, width=80, height=60, bg=bg_color, fg=digit_fg,
+            activebackground='#388E3C' if text.isdigit() else '#1976D2',
+            activeforeground='#FFFFFF', command=lambda t=text: clickbut(t),
+            font=("Courier New", 16, 'bold')
+        ).place(x=x, y=y)
 
 # Run the main loop
 me.mainloop()
